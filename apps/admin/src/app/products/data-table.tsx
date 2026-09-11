@@ -8,7 +8,7 @@ import {
   getSortedRowModel,
   SortingState,
   useReactTable,
-} from "..tanstack/react-table";
+} from "@tanstack/react-table";
 
 import {
   Table,
@@ -17,8 +17,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../components/ui/table";
-import { DataTablePagination } from "../components/TablePagination";
+} from "../../components/ui/table";
+import { DataTablePagination } from "../../components/TablePagination";
 import { useState } from "react";
 import { Trash2 } from "lucide-react";
 

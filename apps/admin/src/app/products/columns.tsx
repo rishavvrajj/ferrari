@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "../components/ui/button";
-import { Checkbox } from "../components/ui/checkbox";
+import { Button } from "../../components/ui/button";
+import { Checkbox } from "../../components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,9 +9,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../components/ui/dropdown-menu";
-import { cn } from "../lib/utils";
-import { ColumnDef } from "..tanstack/react-table";
+} from "../../components/ui/dropdown-menu";
+import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -54,7 +53,7 @@ export const columns: ColumnDef<Product>[] = [
       return (
         <div className="w-9 h-9 relative">
           <Image
-            src={product.images[product.colors[0]]}
+            src={product.images[product.colors[0] ?? ""] ?? ""}
             alt={product.name}
             fill
             className="rounded-full object-cover"

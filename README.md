@@ -1,160 +1,267 @@
-# Turborepo starter
+# Ferrari — Full-Stack E-Commerce Platform
 
-This Turborepo starter is maintained by the Turborepo core team.
+A scalable, full-stack e-commerce application built with **Next.js**, **TypeScript**, and **Turborepo**. The project uses a monorepo architecture to separate the customer storefront, administration dashboard, shared UI components, and platform configuration.
 
-## Using this example
+> Built as a microservices-oriented shopping application tutorial project, focused on maintainable boundaries, reusable packages, and independently deployable frontend applications.
 
-Run the following command:
+## Live Demo
 
-```sh
-npx create-turbo@latest
+- **Storefront:** [ferrari-client.vercel.app](https://ferrari-client.vercel.app/)
+- **Repository:** [github.com/rishavvrajj/ferrari](https://github.com/rishavvrajj/ferrari)
+
+## Architecture
+
+```text
+                         ┌─────────────────────┐
+                         │     Turborepo       │
+                         │  npm Workspaces     │
+                         └──────────┬──────────┘
+                                    │
+          ┌─────────────────────────┼─────────────────────────┐
+          │                         │                         │
+ ┌────────▼────────┐       ┌────────▼────────┐      ┌────────▼────────┐
+ │ Customer Client │       │ Admin Dashboard │      │ Documentation   │
+ │   apps/client   │       │   apps/admin    │      │   apps/docs     │
+ └────────┬────────┘       └────────┬────────┘      └─────────────────┘
+          │                         │
+          └─────────────┬───────────┘
+                        │
+             ┌──────────▼───────────┐
+             │ Shared Workspace     │
+             │ packages/ui          │
+             │ eslint-config        │
+             │ typescript-config    │
+             └──────────────────────┘
 ```
 
-## What's inside?
+## Features
 
-This Turborepo includes the following packages/apps:
+### Customer Storefront
 
-### Apps and Packages
+- Product browsing and catalog-style shopping interface
+- Responsive product-focused user experience
+- Reusable UI components shared across applications
+- Next.js-based frontend architecture
+- Type-safe development with TypeScript
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `@next/eslint-plugin-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### Admin Dashboard
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+- Separate administrative application
+- Foundation for product, category, inventory, and order management
+- Isolated admin UI and deployment boundary
+- Shared code-quality and TypeScript configuration
 
-### Utilities
+### Developer Experience
 
-This Turborepo has some additional tools already setup for you:
+- Turborepo task orchestration and build caching
+- npm workspaces for managing apps and shared packages
+- Shared React component library
+- Centralized ESLint and TypeScript configurations
+- Prettier-based formatting workflow
+- Independent app builds using Turbo filters
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+## Tech Stack
 
-### Build
+| Category | Technologies |
+| --- | --- |
+| Frontend | Next.js, React, TypeScript |
+| Monorepo | Turborepo, npm Workspaces |
+| Shared Code | React component package (`@repo/ui`) |
+| Code Quality | ESLint, Prettier |
+| Type Safety | TypeScript, shared `tsconfig` package |
+| Deployment | Vercel |
+| Runtime | Node.js 24+ |
 
-To build all apps and packages, run the following command:
+## Repository Structure
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo build
+```text
+ferrari/
+├── apps/
+│   ├── admin/                  # Admin dashboard application
+│   ├── client/                 # Customer-facing storefront
+│   ├── docs/                   # Project documentation app
+│   └── web/                    # Additional Next.js application
+│
+├── packages/
+│   ├── eslint-config/          # Shared ESLint configuration
+│   ├── typescript-config/      # Shared TypeScript configuration
+│   └── ui/                     # Shared React UI component library
+│
+├── package.json                # Root workspace scripts and dependencies
+├── turbo.json                  # Turbo task pipeline configuration
+├── package-lock.json
+└── README.md
 ```
 
-Without global `turbo`, use your package manager:
+## Getting Started
 
-```sh
-cd my-turborepo
-npx turbo build
-npm exec turbo build
-npm exec turbo build
+### Prerequisites
+
+Install the following before running the project:
+
+- Node.js `>= 24`
+- npm `>= 12`
+
+Verify your local environment:
+
+```bash
+node --version
+npm --version
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+### Installation
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo build --filter=docs
+```bash
+git clone [https://github.com/rishavvrajj/ferrari.git](https://github.com/rishavvrajj/ferrari.git)
+cd ferrari
+npm install
 ```
 
-Without global `turbo`:
+## Development
 
-```sh
-npx turbo build --filter=docs
-npm exec turbo build --filter=docs
-npm exec turbo build --filter=docs
+Start all workspace applications in development mode:
+
+```bash
+npm run dev
 ```
 
-### Develop
+Run a single application with Turbo filtering:
 
-To develop all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo dev
+```bash
+npx turbo dev --filter=client
 ```
 
-Without global `turbo`, use your package manager:
+Examples:
 
-```sh
-cd my-turborepo
-npx turbo dev
-npm exec turbo dev
-npm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo dev --filter=web
-```
-
-Without global `turbo`:
-
-```sh
+```bash
+npx turbo dev --filter=admin
+npx turbo dev --filter=client
+npx turbo dev --filter=docs
 npx turbo dev --filter=web
-npm exec turbo dev --filter=web
-npm exec turbo dev --filter=web
 ```
 
-### Remote Caching
+## Scripts
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Runs the `dev` task across workspace applications |
+| `npm run build` | Builds all apps and packages using Turbo |
+| `npm run lint` | Runs ESLint checks across the monorepo |
+| `npm run check-types` | Runs TypeScript validation across the monorepo |
+| `npm run format` | Formats `.ts`, `.tsx`, and `.md` files with Prettier |
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+## Production Build
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+Build every application and shared package:
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
+```bash
+npm run build
 ```
 
-Without global `turbo`, use your package manager:
+Build only the customer-facing storefront:
 
-```sh
-cd my-turborepo
-npx turbo login
-npm exec turbo login
-npm exec turbo login
+```bash
+npx turbo build --filter=client
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+Build only the admin dashboard:
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
+```bash
+npx turbo build --filter=admin
 ```
 
-Without global `turbo`:
+## Quality Checks
 
-```sh
-npx turbo link
-npm exec turbo link
-npm exec turbo link
+Run these commands before opening a pull request:
+
+```bash
+npm run lint
+npm run check-types
+npm run build
 ```
 
-## Useful Links
+Format the codebase:
 
-Learn more about the power of Turborepo:
+```bash
+npm run format
+```
 
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
-# ferrari
+## Turbo Pipeline
+
+The root `turbo.json` configures the project task graph:
+
+- `build` runs dependency builds first through `dependsOn: ["^build"]`
+- Build outputs include `.next/**` while excluding development and cache artifacts
+- `lint` and `check-types` run across dependent packages first
+- `dev` is persistent and intentionally excluded from Turbo caching
+
+This ensures shared packages are built and validated before applications that depend on them.
+
+## Microservices Direction
+
+This repository is structured to support a microservices-oriented e-commerce system. The current monorepo boundaries make it straightforward to evolve the platform into independently deployable services.
+
+```text
+Future service boundaries:
+
+services/
+├── auth-service/          # Authentication and authorization
+├── catalog-service/       # Products, categories, pricing
+├── inventory-service/     # Stock management
+├── order-service/         # Cart, checkout, orders
+├── payment-service/       # Payment-provider integration
+├── notification-service/  # Email and order notifications
+└── api-gateway/           # Central API routing and aggregation
+```
+
+Potential production integrations:
+
+- PostgreSQL or MongoDB for persistent data
+- Prisma or Drizzle ORM for database access
+- Redis for caching, sessions, and rate limiting
+- Stripe or Razorpay for payments
+- Kafka or RabbitMQ for asynchronous events
+- Docker for containerized services
+- GitHub Actions for CI/CD
+- Vercel for frontend deployment
+
+## Contribution Workflow
+
+1. Fork the repository.
+2. Create a new branch:
+
+   ```bash
+   git checkout -b feature/feature-name
+   ```
+
+3. Implement your changes.
+4. Run linting, type checks, and builds.
+5. Commit using a clear conventional-style message:
+
+   ```bash
+   git commit -m "feat: add product management view"
+   ```
+
+6. Push the branch and open a pull request.
+
+## Roadmap
+
+- [ ] Product catalog and category management
+- [ ] Authentication and role-based access control
+- [ ] Shopping cart and checkout flow
+- [ ] Order management dashboard
+- [ ] Inventory tracking
+- [ ] Payment gateway integration
+- [ ] Database persistence
+- [ ] API gateway and service boundaries
+- [ ] Docker-based local development
+- [ ] CI/CD pipeline
+- [ ] Unit, integration, and end-to-end tests
+
+## License
+
+This repository does not currently include a license. Add a `LICENSE` file before distributing or permitting reuse of the project.
+
+---
+
+Built with Next.js, TypeScript, npm Workspaces, and Turborepo.

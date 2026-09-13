@@ -11,6 +11,7 @@
   "keywords": [],
   "license": "ISC",
   "dependencies": {
+    "@clerk/fastify": "^3.1.77",
     "fastify": "^5.12.4"
   },
   "devDependencies": {

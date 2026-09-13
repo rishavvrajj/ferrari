@@ -8,7 +8,7 @@ fastify.get('/health', (request, reply) => {
         uptime: process.uptime(),
         timestamp: Date.now()
     })
-})
+});
 
 const start = (async () => {
     try {
